@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#111827" />
+  <title>Calorie Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>Calorie Tracker</h1>
+    <p class="subtitle">Log meals, see calories by breakfast/lunch/dinner/snacks, and track your daily total.</p>
+    <p class="muted tiny">Saves on-device (localStorage). Nothing is uploaded anywhere.</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="results-header">
+        <h2>Daily goal</h2>
+      </div>
+      <div class="row">
+        <label class="field">
+          <span>Daily calorie goal</span>
+          <input id="goalInput" type="number" min="0" step="10" placeholder="e.g., 2000" />
+        </label>
+        <div class="field">
+          <span>&nbsp;</span>
+          <button id="saveGoalBtn">Save goal</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Log a meal</h2>
+      <div class="row">
+        <label class="field">
+          <span>Meal</span>
+          <select id="mealSelect">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snack">Snack</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Food / description</span>
+          <input id="foodInput" placeholder="e.g., Grilled chicken salad" />
+        </label>
+
+        <label class="field">
+          <span>Calories</span>
+          <input id="caloriesInput" type="number" min="0" step="1" placeholder="e.g., 450" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="field">
+          <span>Protein (g, optional)</span>
+          <input id="proteinInput" type="number" min="0" step="1" placeholder="e.g., 30" />
+        </label>
+
+        <label class="field">
+          <span>Carbs (g, optional)</span>
+          <input id="carbsInput" type="number" min="0" step="1" placeholder="e.g., 40" />
+        </label>
+
+        <label class="field">
+          <span>Fat (g, optional)</span>
+          <input id="fatInput" type="number" min="0" step="1" placeholder="e.g., 15" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="field">
+          <span>Date</span>
+          <input id="dateInput" type="date" />
+        </label>
+        <label class="field">
+          <span>Time</span>
+          <input id="timeInput" type="time" />
+        </label>
+        <div class="field">
+          <span>&nbsp;</span>
+          <button id="addEntryBtn">Add entry</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="results-header">
+        <h2>Day view</h2>
+        <label class="field" style="max-width:200px;margin:0;">
+          <span>Viewing date</span>
+          <input id="viewDateInput" type="date" />
+        </label>
+      </div>
+
+      <div id="dayTotals" class="muted"></div>
+      <div id="dayProgress" class="progress-wrap">
+        <div id="dayProgressBar" class="progress-bar"></div>
+      </div>
+
+      <div id="mealGroups"></div>
+    </section>
+
+    <section class="card">
+      <h2>Last 7 days</h2>
+      <div id="historyChart" class="history-chart"></div>
+      <div id="historyList" class="results"></div>
+    </section>
+
+    <section class="card">
+      <h2>Data</h2>
+      <div class="actions">
+        <button id="exportBtn" class="ghost">Export (copy)</button>
+        <button id="importBtn" class="ghost">Import</button>
+        <button id="clearAllBtn" class="danger">Clear all</button>
+      </div>
+    </section>
+
+    <dialog id="importModal">
+      <div class="modal-header">
+        <h3>Import</h3>
+        <button id="importCloseBtn" class="ghost">Close</button>
+      </div>
+      <div class="modal-body">
+        <p class="muted">Paste exported JSON here.</p>
+        <textarea id="importText" rows="10" style="width:100%"></textarea>
+        <div class="actions">
+          <button id="importDoBtn">Import now</button>
+        </div>
+      </div>
+    </dialog>
+
+    <footer class="footer">
+      <div class="fineprint">
+        Data is saved on your device (localStorage). If you clear browser data, it resets.
+      </div>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
